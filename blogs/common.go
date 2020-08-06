@@ -1,6 +1,40 @@
 package blogs
 
-var Blogs = map[string]string{
+import "time"
+
+type (
+	Company struct {
+		ID   int
+		Name string
+	}
+
+	Blog struct {
+		ID        int
+		Title     string
+		URL       string
+		CreatedAt time.Time
+	}
+
+	CompanyBlog struct {
+		CompanyID int
+		BLogID    int
+	}
+)
+
+var CompanyList = []string{
+	"CyberAgent",
+	"Cookpad",
+	"DeNA",
+	"Eureka",
+	"GMO",
+	"Gnosy",
+	"mercari",
+	"MoneyForward",
+	"VOYAGE GROUP",
+	"ZOZOTOWN",
+}
+
+var CompanyBlogURL = map[string]string{
 	"CyberAgent":   "https://developers.cyberagent.co.jp/blog/archives/category/engineer/",
 	"Cookpad":      "https://techlife.cookpad.com/archive",
 	"DeNA":         "https://engineer.dena.com/",
