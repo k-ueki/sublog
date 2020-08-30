@@ -30,7 +30,7 @@ var CompanyList = []string{
 	"Gnosy",
 	"mercari",
 	"MoneyForward",
-	"VOYAGE GROUP",
+	"VOYAGEGROUP",
 	"ZOZOTOWN",
 }
 

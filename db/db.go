@@ -1,8 +1,11 @@
 package db
 
 import (
+	"fmt"
 	"log"
 	"os"
+
+	"github.com/k-ueki/sublog/config"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -24,35 +27,16 @@ func init() {
 		os.Exit(1)
 	}
 
-	if err := db.Exec(`CREATE TABLE IF NOT EXISTS company (
+	con := config.NewConfig()
+	for idx := range con.BlogCompanyList {
+		sql := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s_blog (
 			id INT AUTO_INCREMENT PRIMARY KEY,
-			name VARCHAR(55) NOT NULL
-		)`).Error; err != nil {
-		log.Fatal("cannot create table:company", err)
-		os.Exit(1)
+			title VARCHAR(111) NOT NULL,
+			url VARCHAR(111) NOT NULL,
+			created_at DATETIME NOT NULL)`, con.BlogCompanyList[idx])
+		if err := db.Exec(sql).Error; err != nil {
+			log.Fatal("cannot create table:company", err)
+			os.Exit(1)
+		}
 	}
-	if err := db.Exec(`CREATE TABLE IF NOT EXISTS blog (
-			id INT AUTO_INCREMENT PRIMARY KEY,
-			title VARCHAR(77) NOT NULL,
-			url VARCHAR(85) NOT NULL,
-			created_at DATETIME NOT NULL
-		)`).Error; err != nil {
-		log.Fatal("cannot create table:blog", err)
-		os.Exit(1)
-	}
-	if err := db.Exec(`CREATE TABLE IF NOT EXISTS company_blog (
-			company_id INT NOT NULL,
-			blog_id    INT NOT NULL,
-			FOREIGN KEY company_blog_company_id	(company_id) REFERENCES company(id),
-			FOREIGN KEY company_blog_blog_id(blog_id) REFERENCES blog(id)
-		)`).Error; err != nil {
-		log.Fatal("cannot create table:company_blog", err)
-		os.Exit(1)
-	}
-
-	//for _, com := range blogs.CompanyList {
-	//	if err := db.Debug().Exec("INSERT INTO company (`name`) VALUES (?)", com).Error; err != nil {
-	//		log.Fatalf("cannot insert company:%s err:%v", com, err.Error)
-	//	}
-	//}
 }
