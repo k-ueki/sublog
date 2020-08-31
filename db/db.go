@@ -30,26 +30,17 @@ func init() {
 		os.Exit(1)
 	}
 
-	con := config.NewConfig()
-	for idx := range con.BlogCompanyList {
+	for idx := range config.Config.BlogCompanyList {
 		sql := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s_blog (
 			id INT AUTO_INCREMENT PRIMARY KEY,
 			title VARCHAR(111) NOT NULL,
 			url VARCHAR(111) NOT NULL,
-			created_at DATETIME NOT NULL)`, con.BlogCompanyList[idx])
+			created_at DATETIME NOT NULL)`, config.Config.BlogCompanyList[idx])
 		if err := db.Exec(sql).Error; err != nil {
 			log.Fatal("cannot create table:company", err)
 			os.Exit(1)
 		}
 	}
-}
-
-func GetBlogList(db *gorm.DB, tableName string) (*blogs.BlogList, error) {
-	var resp blogs.BlogList
-	if err := db.Debug().Table(tableName).Find(&resp.Blogs).Error; err != nil {
-		return nil, err
-	}
-	return &resp, nil
 }
 
 func GetLastDate(db *gorm.DB, tableName string) (time.Time, error) {

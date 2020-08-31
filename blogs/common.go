@@ -1,6 +1,7 @@
 package blogs
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -72,4 +73,15 @@ func (b *BlogList) Save(db *gorm.DB, tableName string) error {
 		}
 	}
 	return nil
+}
+
+func (b *BlogList) Append(list *BlogList) {
+	for _, blog := range b.Blogs {
+		list.Blogs = append(list.Blogs, blog)
+	}
+}
+
+func (b *Blog) GenerateJson(ch chan string) {
+	jsonStr := fmt.Sprintf(`{"text":"%s\n%s"}`, b.Title, b.URL)
+	ch <- jsonStr
 }

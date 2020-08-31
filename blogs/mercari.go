@@ -25,7 +25,7 @@ func (m *Mercari) GetTableName() string {
 }
 
 func (m *Mercari) Get(lastDate time.Time) (BlogList, error) {
-	res, err := util.HttpRequest(m.URL + "/blog")
+	res, err := util.HttpGet(m.URL + "/blog")
 	if err != nil {
 		return BlogList{nil}, err
 	}

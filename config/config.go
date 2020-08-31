@@ -1,15 +1,32 @@
 package config
 
-import "github.com/k-ueki/sublog/blogs"
+import (
+	"log"
+	"os"
 
-type Config struct {
+	"github.com/k-ueki/sublog/blogs"
+
+	ini "gopkg.in/ini.v1"
+)
+
+type ConfigList struct {
 	BlogCompanyList []string
 	ParentBlogURL   map[string]string
+	SlackURL        string
 }
 
-func NewConfig() *Config {
-	return &Config{
+var Config ConfigList
+
+func init() {
+	cfg, err := ini.Load("../../config.ini")
+	if err != nil {
+		log.Printf("Failed to read file: config.ini, err: %v", err)
+		os.Exit(1)
+	}
+
+	Config = ConfigList{
 		BlogCompanyList: blogs.CompanyList,
 		ParentBlogURL:   blogs.CompanyBlogURL,
+		SlackURL:        cfg.Section("slack").Key("url").String(),
 	}
 }
