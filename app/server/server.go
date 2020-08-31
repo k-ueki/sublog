@@ -32,6 +32,12 @@ func main() {
 	}
 	dBlogs.Append(&list)
 
+	eBlogs, err := blogContoller.GetEurekaBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	eBlogs.Append(&list)
+
 	merBlogs, err := blogContoller.GetMercariBlog()
 	if err != nil {
 		log.Fatal(err)

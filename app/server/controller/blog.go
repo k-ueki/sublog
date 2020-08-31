@@ -66,6 +66,20 @@ func (c *BlogController) GetDeNABlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
+func (c *BlogController) GetEurekaBlog() (*blogs.BlogList, error) {
+	e := blogs.NewEureka(config.Config.ParentBlogURL)
+	latest, _ := database.GetLastDate(c.DB, e.GetTableName())
+
+	blogs, err := e.Get(latest)
+	if err != nil {
+		return nil, err
+	}
+	if err := blogs.Save(c.DB, e.GetTableName()); err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
+
 func (c *BlogController) GetMercariBlog() (*blogs.BlogList, error) {
 	mer := blogs.NewMercari(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, mer.GetTableName())
