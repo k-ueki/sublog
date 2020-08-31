@@ -2,6 +2,8 @@ package blogs
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type (
@@ -21,11 +23,11 @@ type (
 		CompanyID int
 		BLogID    int
 	}
-)
 
-type BlogInterface interface {
-	Get() error
-}
+	BlogList struct {
+		Blogs []*Blog
+	}
+)
 
 var (
 	CompanyList = []string{
@@ -64,6 +66,11 @@ func NewBlog(title, url, date string) *Blog {
 	}
 }
 
-func (b *Blog) Save() error {
+func (b *BlogList) Save(db *gorm.DB, tableName string) error {
+	for _, blog := range b.Blogs {
+		if err := db.Table(tableName).Save(blog).Error; err != nil {
+			return err
+		}
+	}
 	return nil
 }
