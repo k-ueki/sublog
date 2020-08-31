@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/k-ueki/sublog/blogs"
+
 	"github.com/k-ueki/sublog/config"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -39,4 +41,12 @@ func init() {
 			os.Exit(1)
 		}
 	}
+}
+
+func GetBlogList(db *gorm.DB, tableName string) (*blogs.BlogList, error) {
+	var resp blogs.BlogList
+	if err := db.Debug().Table(tableName).Find(&resp.Blogs).Error; err != nil {
+		return nil, err
+	}
+	return &resp, nil
 }
