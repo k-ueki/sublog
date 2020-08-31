@@ -45,7 +45,7 @@ func init() {
 
 func GetLastDate(db *gorm.DB, tableName string) (time.Time, error) {
 	var blog blogs.Blog
-	if err := db.Debug().Table(tableName).Order("created_at DESC").First(&blog).Error; err != nil {
+	if err := db.Table(tableName).Order("created_at DESC").First(&blog).Error; err != nil {
 		return time.Time{}, err
 	}
 	return blog.CreatedAt, nil

@@ -56,5 +56,23 @@ func main() {
 	}
 	merBlogs.Append(&list)
 
+	mfBlogs, err := blogContoller.GetMoneyForwardBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	mfBlogs.Append(&list)
+
+	vgBlogs, err := blogContoller.GetVoyageGroupBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	vgBlogs.Append(&list)
+
+	ztBlogs, err := blogContoller.GetZozoTownBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	ztBlogs.Append(&list)
+
 	slack.Send(&list)
 }

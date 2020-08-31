@@ -121,3 +121,45 @@ func (c *BlogController) GetMercariBlog() (*blogs.BlogList, error) {
 	}
 	return blogs, nil
 }
+
+func (c *BlogController) GetMoneyForwardBlog() (*blogs.BlogList, error) {
+	mf := blogs.NewMoneyForward(config.Config.ParentBlogURL)
+	latest, _ := database.GetLastDate(c.DB, mf.GetTableName())
+
+	blogs, err := mf.Get(latest)
+	if err != nil {
+		return nil, err
+	}
+	if err := blogs.Save(c.DB, mf.GetTableName()); err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
+
+func (c *BlogController) GetVoyageGroupBlog() (*blogs.BlogList, error) {
+	vg := blogs.NewVoyageGroup(config.Config.ParentBlogURL)
+	latest, _ := database.GetLastDate(c.DB, vg.GetTableName())
+
+	blogs, err := vg.Get(latest)
+	if err != nil {
+		return nil, err
+	}
+	if err := blogs.Save(c.DB, vg.GetTableName()); err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
+
+func (c *BlogController) GetZozoTownBlog() (*blogs.BlogList, error) {
+	zt := blogs.NewZozoTown(config.Config.ParentBlogURL)
+	latest, _ := database.GetLastDate(c.DB, zt.GetTableName())
+
+	blogs, err := zt.Get(latest)
+	if err != nil {
+		return nil, err
+	}
+	if err := blogs.Save(c.DB, zt.GetTableName()); err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
