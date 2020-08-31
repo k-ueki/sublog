@@ -14,17 +14,23 @@ func main() {
 	blogContoller := controller.NewBlogContoller()
 	list := blogs.BlogList{}
 
-	merBlogs, err := blogContoller.GetMercariBlog()
+	cpBlogs, err := blogContoller.GetCookpadBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
-	merBlogs.Append(&list)
+	cpBlogs.Append(&list)
 
 	caBlogs, err := blogContoller.GetCyberAgentBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	caBlogs.Append(&list)
+
+	merBlogs, err := blogContoller.GetMercariBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	merBlogs.Append(&list)
 
 	slack.Send(&list)
 }
