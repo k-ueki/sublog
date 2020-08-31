@@ -24,15 +24,15 @@ func (m *Mercari) GetTableName() string {
 	return "mercari_blog"
 }
 
-func (m *Mercari) Get(lastDate time.Time) (BlogList, error) {
+func (m *Mercari) Get(lastDate time.Time) (*BlogList, error) {
 	res, err := util.HttpGet(m.URL + "/blog")
 	if err != nil {
-		return BlogList{nil}, err
+		return nil, err
 	}
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		return BlogList{nil}, err
+		return nil, err
 	}
 
 	var blogList BlogList
@@ -49,5 +49,5 @@ func (m *Mercari) Get(lastDate time.Time) (BlogList, error) {
 		}
 	})
 
-	return blogList, nil
+	return &blogList, nil
 }
