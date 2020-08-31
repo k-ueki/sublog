@@ -1,8 +1,6 @@
 package blogs
 
 import (
-	"fmt"
-
 	"github.com/PuerkitoBio/goquery"
 	"github.com/k-ueki/sublog/util"
 )
@@ -20,17 +18,23 @@ func NewMercari(blogMap map[string]string) *Mercari {
 	}
 }
 
-func (m *Mercari) Get() error {
+func (m *Mercari) GetTableName() string {
+	return "mercari_blog"
+}
+
+func (m *Mercari) Get() (BlogList, error) {
+
 	res, err := util.HttpRequest(m.URL + "/blog")
 	if err != nil {
-		return err
+		return BlogList{nil}, err
 	}
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		return err
+		return BlogList{nil}, err
 	}
 
+	var blogList BlogList
 	doc.Find(".post-list__item").Each(func(i int, s *goquery.Selection) {
 		date, _ := s.Find("time").Attr("datetime")
 		url, _ := s.Find("a").Attr("href")
@@ -38,7 +42,8 @@ func (m *Mercari) Get() error {
 		title := s.Find(".post__title").Text()
 
 		blog := NewBlog(title, url, date)
-		fmt.Println(*blog)
+		blogList.Blogs = append(blogList.Blogs, blog)
 	})
-	return nil
+
+	return blogList, nil
 }
