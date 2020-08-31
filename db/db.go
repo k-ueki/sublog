@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/k-ueki/sublog/blogs"
 
@@ -49,4 +50,12 @@ func GetBlogList(db *gorm.DB, tableName string) (*blogs.BlogList, error) {
 		return nil, err
 	}
 	return &resp, nil
+}
+
+func GetLastDate(db *gorm.DB, tableName string) (time.Time, error) {
+	var blog blogs.Blog
+	if err := db.Debug().Table(tableName).Order("created_at DESC").First(&blog).Error; err != nil {
+		return time.Time{}, err
+	}
+	return blog.CreatedAt, nil
 }
