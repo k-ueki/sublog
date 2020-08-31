@@ -57,12 +57,11 @@ var (
 	}
 )
 
-func NewBlog(title, url, date string) *Blog {
-	t, _ := time.Parse("2006-01-02", date)
+func NewBlog(title, url string, date time.Time) *Blog {
 	return &Blog{
 		Title:     title,
 		URL:       url,
-		CreatedAt: t,
+		CreatedAt: date,
 	}
 }
 
