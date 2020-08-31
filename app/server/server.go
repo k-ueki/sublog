@@ -26,6 +26,12 @@ func main() {
 	}
 	caBlogs.Append(&list)
 
+	dBlogs, err := blogContoller.GetDeNABlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	dBlogs.Append(&list)
+
 	merBlogs, err := blogContoller.GetMercariBlog()
 	if err != nil {
 		log.Fatal(err)
