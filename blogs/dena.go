@@ -45,7 +45,7 @@ func (d *DeNA) Get(lastDate time.Time) (*BlogList, error) {
 		url, _ := s.Find("div > h2 > a").Attr("href")
 		url = d.URL + url
 
-		blog := NewBlog(title, url, date)
+		blog := NewBlog(title, url, d.Name, date)
 		//fmt.Println(blog)
 		blogList.Blogs = append(blogList.Blogs, blog)
 	})

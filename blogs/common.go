@@ -14,10 +14,11 @@ type (
 	}
 
 	Blog struct {
-		ID        int
-		Title     string
-		URL       string
-		CreatedAt time.Time
+		ID          int
+		Title       string
+		URL         string
+		CompanyName string `gorm:"-"`
+		CreatedAt   time.Time
 	}
 
 	CompanyBlog struct {
@@ -56,11 +57,12 @@ var (
 	}
 )
 
-func NewBlog(title, url string, date time.Time) *Blog {
+func NewBlog(title, url, company string, date time.Time) *Blog {
 	return &Blog{
-		Title:     title,
-		URL:       url,
-		CreatedAt: date,
+		Title:       title,
+		URL:         url,
+		CompanyName: company,
+		CreatedAt:   date,
 	}
 }
 
@@ -80,6 +82,6 @@ func (b *BlogList) Append(list *BlogList) {
 }
 
 func (b *Blog) GenerateJson(ch chan string) {
-	jsonStr := fmt.Sprintf(`{"text":"%s\n%s"}`, b.Title, b.URL)
+	jsonStr := fmt.Sprintf(`{"text":"%s: %s\n%s"}`, b.CompanyName, b.Title, b.URL)
 	ch <- jsonStr
 }

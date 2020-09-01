@@ -45,7 +45,7 @@ func (e *Eureka) Get(lastDate time.Time) (*BlogList, error) {
 				title := ss.Find("a > h3").Text()
 
 				if title != "" && url != "" {
-					blog := NewBlog(title, url, date)
+					blog := NewBlog(title, url, e.Name, date)
 					blogList.Blogs = append(blogList.Blogs, blog)
 				}
 			}

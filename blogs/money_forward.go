@@ -43,7 +43,7 @@ func (m *MoneyForward) Get(lastDate time.Time) (*BlogList, error) {
 			url, _ := s.Find(".entry-title > a").Attr("href")
 			title := s.Find(".entry-title > a").Text()
 
-			blog := NewBlog(title, url, date)
+			blog := NewBlog(title, url, m.Name, date)
 			blogList.Blogs = append(blogList.Blogs, blog)
 		}
 	})

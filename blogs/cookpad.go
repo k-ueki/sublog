@@ -43,7 +43,7 @@ func (c *Cookpad) Get(lastDate time.Time) (*BlogList, error) {
 			url, _ := s.Find(".archive-entry-header > .entry-title > a").Attr("href")
 			title := s.Find(".archive-entry-header > .entry-title > a").Text()
 
-			blog := NewBlog(title, url, date)
+			blog := NewBlog(title, url, c.Name, date)
 			blogList.Blogs = append(blogList.Blogs, blog)
 		}
 	})

@@ -44,7 +44,7 @@ func (c *CyberAgent) Get(lastDate time.Time) (*BlogList, error) {
 			url, _ := s.Find(".card-caeng__title-link").Attr("href")
 			title := s.Find(".card-caeng__title-link").Text()
 
-			blog := NewBlog(title, url, date)
+			blog := NewBlog(title, url, c.Name, date)
 			blogList.Blogs = append(blogList.Blogs, blog)
 		}
 	})

@@ -44,7 +44,7 @@ func (m *Mercari) Get(lastDate time.Time) (*BlogList, error) {
 			url = m.URL + url
 			title := s.Find(".post__title").Text()
 
-			blog := NewBlog(title, url, date)
+			blog := NewBlog(title, url, m.Name, date)
 			blogList.Blogs = append(blogList.Blogs, blog)
 		}
 	})
