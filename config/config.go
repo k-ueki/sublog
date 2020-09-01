@@ -13,6 +13,7 @@ type ConfigList struct {
 	BlogCompanyList []string
 	ParentBlogURL   map[string]string
 	SlackURL        string
+	DBDial          string
 }
 
 var Config ConfigList
@@ -28,5 +29,6 @@ func init() {
 		BlogCompanyList: blogs.CompanyList,
 		ParentBlogURL:   blogs.CompanyBlogURL,
 		SlackURL:        cfg.Section("slack").Key("url").String(),
+		DBDial:          cfg.Section("db").Key("dial").String(),
 	}
 }

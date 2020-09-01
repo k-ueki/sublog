@@ -15,7 +15,7 @@ import (
 )
 
 func DBConnection() (*gorm.DB, error) {
-	db, err := gorm.Open("mysql", "root:@/sublog?parseTime=true")
+	db, err := gorm.Open("mysql", config.Config.DBDial)
 	if err != nil {
 		log.Fatal("err:", err)
 		return nil, err
