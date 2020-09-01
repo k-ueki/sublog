@@ -4,11 +4,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/jinzhu/gorm"
-
 	"github.com/k-ueki/sublog/blogs"
 	"github.com/k-ueki/sublog/config"
 	database "github.com/k-ueki/sublog/db"
+	"gorm.io/gorm"
 )
 
 type BlogController struct {

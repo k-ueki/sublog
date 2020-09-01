@@ -6,16 +6,18 @@ import (
 	"os"
 	"time"
 
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+
 	"github.com/k-ueki/sublog/blogs"
 
 	"github.com/k-ueki/sublog/config"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 )
 
 func DBConnection() (*gorm.DB, error) {
-	db, err := gorm.Open("mysql", config.Config.DBDial)
+	db, err := gorm.Open(mysql.Open(config.Config.DBDial), &gorm.Config{})
 	if err != nil {
 		log.Fatal("err:", err)
 		return nil, err
