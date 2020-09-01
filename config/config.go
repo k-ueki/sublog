@@ -19,7 +19,8 @@ type ConfigList struct {
 var Config ConfigList
 
 func init() {
-	cfg, err := ini.Load("config.ini")
+	cfg, err := ini.Load("/home/ec2-user/sublog/config.ini")
+	//cfg, err := ini.Load("config.ini")
 	if err != nil {
 		log.Printf("Failed to read file: config.ini, err: %v", err)
 		os.Exit(1)

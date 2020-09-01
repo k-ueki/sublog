@@ -14,6 +14,12 @@ func main() {
 	blogContoller := controller.NewBlogContoller()
 	list := blogs.BlogList{}
 
+	awsBlogs, err := blogContoller.GetAndSaveAWSBlog()
+	if err != nil {
+		log.Fatal(err)
+	}
+	awsBlogs.Append(&list)
+
 	cpBlogs, err := blogContoller.GetAndSaveCookpadBlog()
 	if err != nil {
 		log.Fatal(err)

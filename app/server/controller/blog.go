@@ -23,6 +23,20 @@ func NewBlogContoller() *BlogController {
 	return &BlogController{DB: db}
 }
 
+func (c *BlogController) GetAndSaveAWSBlog() (*blogs.BlogList, error) {
+	aws := blogs.NewAWS(config.Config.ParentBlogURL)
+	latest, _ := database.GetLastDate(c.DB, aws.GetTableName())
+
+	blogs, err := aws.Get(latest)
+	if err != nil {
+		return nil, err
+	}
+	if err := blogs.Save(c.DB, aws.GetTableName()); err != nil {
+		return nil, err
+	}
+	return blogs, nil
+}
+
 func (c *BlogController) GetAndSaveCookpadBlog() (*blogs.BlogList, error) {
 	cp := blogs.NewCookpad(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, cp.GetTableName())

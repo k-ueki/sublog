@@ -33,6 +33,7 @@ type (
 
 var (
 	CompanyList = []string{
+		"AWS",
 		"CyberAgent",
 		"Cookpad",
 		"DeNA",
@@ -45,6 +46,7 @@ var (
 	}
 
 	CompanyBlogURL = map[string]string{
+		"AWS":          "https://aws.amazon.com/jp/blogs/news",
 		"CyberAgent":   "https://developers.cyberagent.co.jp/blog/archives/category/engineer/",
 		"Cookpad":      "https://techlife.cookpad.com/archive",
 		"DeNA":         "https://engineer.dena.com",
