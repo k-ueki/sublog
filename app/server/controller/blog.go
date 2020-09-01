@@ -80,20 +80,6 @@ func (c *BlogController) GetAndSaveEurekaBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetAndSaveGmoBlog() (*blogs.BlogList, error) {
-	gmo := blogs.NewGMO(config.Config.ParentBlogURL)
-	latest, _ := database.GetLastDate(c.DB, gmo.GetTableName())
-
-	blogs, err := gmo.Get(latest)
-	if err != nil {
-		return nil, err
-	}
-	if err := blogs.Save(c.DB, gmo.GetTableName()); err != nil {
-		return nil, err
-	}
-	return blogs, nil
-}
-
 func (c *BlogController) GetAndSaveGnosyBlog() (*blogs.BlogList, error) {
 	gnosy := blogs.NewGnosy(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, gnosy.GetTableName())

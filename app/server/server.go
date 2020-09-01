@@ -38,12 +38,6 @@ func main() {
 	}
 	eBlogs.Append(&list)
 
-	gmoBlogs, err := blogContoller.GetAndSaveGmoBlog()
-	if err != nil {
-		log.Fatal(err)
-	}
-	gmoBlogs.Append(&list)
-
 	gnosyBlogs, err := blogContoller.GetAndSaveGnosyBlog()
 	if err != nil {
 		log.Fatal(err)
