@@ -24,7 +24,7 @@ func NewBlogContoller() *BlogController {
 	return &BlogController{DB: db}
 }
 
-func (c *BlogController) GetCookpadBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveCookpadBlog() (*blogs.BlogList, error) {
 	cp := blogs.NewCookpad(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, cp.GetTableName())
 
@@ -38,7 +38,7 @@ func (c *BlogController) GetCookpadBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetCyberAgentBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveCyberAgentBlog() (*blogs.BlogList, error) {
 	ca := blogs.NewCyberAgent(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, ca.GetTableName())
 
@@ -52,7 +52,7 @@ func (c *BlogController) GetCyberAgentBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetDeNABlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveDeNABlog() (*blogs.BlogList, error) {
 	d := blogs.NewDeNA(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, d.GetTableName())
 
@@ -66,7 +66,7 @@ func (c *BlogController) GetDeNABlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetEurekaBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveEurekaBlog() (*blogs.BlogList, error) {
 	e := blogs.NewEureka(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, e.GetTableName())
 
@@ -80,7 +80,7 @@ func (c *BlogController) GetEurekaBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetGmoBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveGmoBlog() (*blogs.BlogList, error) {
 	gmo := blogs.NewGMO(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, gmo.GetTableName())
 
@@ -94,7 +94,7 @@ func (c *BlogController) GetGmoBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetGnosyBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveGnosyBlog() (*blogs.BlogList, error) {
 	gnosy := blogs.NewGnosy(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, gnosy.GetTableName())
 
@@ -108,7 +108,7 @@ func (c *BlogController) GetGnosyBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetMercariBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveMercariBlog() (*blogs.BlogList, error) {
 	mer := blogs.NewMercari(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, mer.GetTableName())
 
@@ -122,7 +122,7 @@ func (c *BlogController) GetMercariBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetMoneyForwardBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveMoneyForwardBlog() (*blogs.BlogList, error) {
 	mf := blogs.NewMoneyForward(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, mf.GetTableName())
 
@@ -136,7 +136,7 @@ func (c *BlogController) GetMoneyForwardBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetVoyageGroupBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveVoyageGroupBlog() (*blogs.BlogList, error) {
 	vg := blogs.NewVoyageGroup(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, vg.GetTableName())
 
@@ -150,7 +150,7 @@ func (c *BlogController) GetVoyageGroupBlog() (*blogs.BlogList, error) {
 	return blogs, nil
 }
 
-func (c *BlogController) GetZozoTownBlog() (*blogs.BlogList, error) {
+func (c *BlogController) GetAndSaveZozoTownBlog() (*blogs.BlogList, error) {
 	zt := blogs.NewZozoTown(config.Config.ParentBlogURL)
 	latest, _ := database.GetLastDate(c.DB, zt.GetTableName())
 

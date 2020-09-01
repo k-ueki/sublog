@@ -36,16 +36,16 @@ func (z *ZozoTown) Get(lastDate time.Time) (*BlogList, error) {
 	}
 
 	var blogList BlogList
-	doc.Find(".article-list > .col-md-12").Each(func(i int, s *goquery.Selection) {
-		//	datetime, _ := s.Find(".card-caeng__content > .card-caeng__meta > time").Attr("datetime")
-		//	date, _ := time.Parse("2006-01-02T15:04:05-07:00", datetime)
-		//	if date.After(lastDate) {
-		//		url, _ := s.Find(".card-caeng__title-link").Attr("href")
-		//		title := s.Find(".card-caeng__title-link").Text()
-		//
-		//		blog := NewBlog(title, url, date)
-		//		blogList.Blogs = append(blogList.Blogs, blog)
-		//	}
+	doc.Find(".archive-entries > section").Each(func(i int, s *goquery.Selection) {
+		datetime, _ := s.Find(".archive-entry-header > .date > a > time").Attr("datetime")
+		date, _ := time.Parse("2006-01-02", datetime)
+		if date.After(lastDate) {
+			url, _ := s.Find(".archive-entry-header > .entry-title > a").Attr("href")
+			title := s.Find(".archive-entry-header > .entry-title > a").Text()
+
+			blog := NewBlog(title, url, date)
+			blogList.Blogs = append(blogList.Blogs, blog)
+		}
 	})
 
 	return &blogList, nil

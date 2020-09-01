@@ -14,61 +14,61 @@ func main() {
 	blogContoller := controller.NewBlogContoller()
 	list := blogs.BlogList{}
 
-	cpBlogs, err := blogContoller.GetCookpadBlog()
+	cpBlogs, err := blogContoller.GetAndSaveCookpadBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	cpBlogs.Append(&list)
 
-	caBlogs, err := blogContoller.GetCyberAgentBlog()
+	caBlogs, err := blogContoller.GetAndSaveCyberAgentBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	caBlogs.Append(&list)
 
-	dBlogs, err := blogContoller.GetDeNABlog()
+	dBlogs, err := blogContoller.GetAndSaveDeNABlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	dBlogs.Append(&list)
 
-	eBlogs, err := blogContoller.GetEurekaBlog()
+	eBlogs, err := blogContoller.GetAndSaveEurekaBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	eBlogs.Append(&list)
 
-	gmoBlogs, err := blogContoller.GetGmoBlog()
+	gmoBlogs, err := blogContoller.GetAndSaveGmoBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	gmoBlogs.Append(&list)
 
-	gnosyBlogs, err := blogContoller.GetGmoBlog()
+	gnosyBlogs, err := blogContoller.GetAndSaveGnosyBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	gnosyBlogs.Append(&list)
 
-	merBlogs, err := blogContoller.GetMercariBlog()
+	merBlogs, err := blogContoller.GetAndSaveMercariBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	merBlogs.Append(&list)
 
-	mfBlogs, err := blogContoller.GetMoneyForwardBlog()
+	mfBlogs, err := blogContoller.GetAndSaveMoneyForwardBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	mfBlogs.Append(&list)
 
-	vgBlogs, err := blogContoller.GetVoyageGroupBlog()
+	vgBlogs, err := blogContoller.GetAndSaveVoyageGroupBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
 	vgBlogs.Append(&list)
 
-	ztBlogs, err := blogContoller.GetZozoTownBlog()
+	ztBlogs, err := blogContoller.GetAndSaveZozoTownBlog()
 	if err != nil {
 		log.Fatal(err)
 	}
