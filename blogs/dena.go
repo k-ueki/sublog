@@ -36,16 +36,18 @@ func (d *DeNA) Get(lastDate time.Time) (*BlogList, error) {
 	}
 
 	var blogList BlogList
-	doc.Find(".article-list > .col-md-12").Each(func(i int, s *goquery.Selection) {
-		//	datetime, _ := s.Find(".card-caeng__content > .card-caeng__meta > time").Attr("datetime")
-		//	date, _ := time.Parse("2006-01-02T15:04:05-07:00", datetime)
-		//	if date.After(lastDate) {
-		//		url, _ := s.Find(".card-caeng__title-link").Attr("href")
-		//		title := s.Find(".card-caeng__title-link").Text()
-		//
-		//		blog := NewBlog(title, url, date)
-		//		blogList.Blogs = append(blogList.Blogs, blog)
-		//	}
+	doc.Find(".list-content > article").Each(func(i int, s *goquery.Selection) {
+		title := s.Find("div > h2 > a").Text()
+
+		datetime := time.Now().Format("2006-01-02")
+		date, _ := time.Parse("2006-01-02", datetime)
+
+		url, _ := s.Find("div > h2 > a").Attr("href")
+		url = d.URL + url
+
+		blog := NewBlog(title, url, date)
+		//fmt.Println(blog)
+		blogList.Blogs = append(blogList.Blogs, blog)
 	})
 
 	return &blogList, nil

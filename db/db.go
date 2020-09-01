@@ -34,7 +34,7 @@ func init() {
 		sql := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s_blog (
 			id INT AUTO_INCREMENT PRIMARY KEY,
 			title VARCHAR(111) NOT NULL,
-			url VARCHAR(111) NOT NULL,
+			url VARCHAR(512) NOT NULL,
 			created_at DATETIME NOT NULL)`, config.Config.BlogCompanyList[idx])
 		if err := db.Exec(sql).Error; err != nil {
 			log.Fatal("cannot create table:company", err)

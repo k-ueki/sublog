@@ -36,19 +36,16 @@ func (c *Cookpad) Get(lastDate time.Time) (*BlogList, error) {
 	}
 
 	var blogList BlogList
-	doc.Find("div#main-inner").Each(func(i int, s *goquery.Selection) {
-		//fmt.Println(i)
-		//datetime := s.Find("article.js-entry-article").Text()
-		//fmt.Println(datetime)
-		//	date, _ := time.Parse("2006-01-02T15:04:05-07:00", datetime)
-		//	if date.After(lastDate) {
-		//		url, _ := s.Find(".card-caeng__title-link").Attr("href")
-		//title := s.Find("div.entry-inner").Text()
-		//fmt.Println(title)
-		//
-		//		blog := NewBlog(title, url, date)
-		//		blogList.Blogs = append(blogList.Blogs, blog)
-		//	}
+	doc.Find(".archive-entries > section").Each(func(i int, s *goquery.Selection) {
+		datetime, _ := s.Find(".archive-entry-header > .date > a > time").Attr("datetime")
+		date, _ := time.Parse("2006-01-02", datetime)
+		if date.After(lastDate) {
+			url, _ := s.Find(".archive-entry-header > .entry-title > a").Attr("href")
+			title := s.Find(".archive-entry-header > .entry-title > a").Text()
+
+			blog := NewBlog(title, url, date)
+			blogList.Blogs = append(blogList.Blogs, blog)
+		}
 	})
 
 	return &blogList, nil

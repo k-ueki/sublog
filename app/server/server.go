@@ -26,11 +26,11 @@ func main() {
 	}
 	caBlogs.Append(&list)
 
-	dBlogs, err := blogContoller.GetAndSaveDeNABlog()
-	if err != nil {
-		log.Fatal(err)
-	}
-	dBlogs.Append(&list)
+	//dBlogs, err := blogContoller.GetAndSaveDeNABlog()
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//dBlogs.Append(&list)
 
 	eBlogs, err := blogContoller.GetAndSaveEurekaBlog()
 	if err != nil {
